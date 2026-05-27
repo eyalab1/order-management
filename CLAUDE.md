@@ -140,7 +140,8 @@ overwriting each other:
 - Coordinate deploys: whoever owns the integration account does the final "Deploy
   API" after both sides' routes are merged.
 - Record the deployed base URL here once stable:
-  Base API URL: __________
+  Base API URL: https://ia2iwtvws0.execute-api.us-east-1.amazonaws.com/prod
+  (REST API "oms-api", stage "prod", region us-east-1)
 
 ## 7. Client rules (Partner A)
 
@@ -200,7 +201,7 @@ Each partner fills in their own rows; one person assembles the final document.
 
 ## 11. Open decisions checklist
 - [x] Integration account owner (section 5): Eyal Abisdris (Partner A)
-- [ ] Deployed base API URL (section 6)
+- [x] Deployed base API URL (section 6): https://ia2iwtvws0.execute-api.us-east-1.amazonaws.com/prod
 - [x] Freestyle service (section 8): Amazon Translate — POST /orders/{orderId}/translate
 - [ ] Who assembles the final Word document
 - [ ] GSI vs in-Lambda sort for "get all" (section 4.1), only if needed
