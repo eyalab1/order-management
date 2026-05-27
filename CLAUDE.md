@@ -30,7 +30,7 @@ our plan for meeting it. When in doubt, the PDF wins.
 
 - Partner A = Eyal Abisdris. Owns: `orders` table design, the Create / Get-all /
   Get-one / Update Lambdas and their API Gateway routes, and the web client.
-- Partner B = (partner name). Owns: the Delete Lambda, the DynamoDB Streams
+- Partner B = Daniel Buts. Owns: the Delete Lambda, the DynamoDB Streams
   processor, SNS notification subscriptions, S3 TXT backup, the PDF summary API, and
   the freestyle enhancement.
 
@@ -113,6 +113,7 @@ record. No separate event format to maintain.
 | Subscribe email | POST | /subscriptions | B |
 | Unsubscribe | DELETE | /subscriptions | B |
 | PDF summary | GET | /reports/deleted-orders | B |
+| Translate description | POST | /orders/{orderId}/translate | B |
 
 All responses are JSON. The PDF summary returns the download URL in the response body
 (never only in logs).
@@ -158,7 +159,14 @@ make it visible in the UI. Candidate ideas (choose one):
 - Amazon Polly: read order details aloud in the client.
 - CloudWatch dashboard: surface order metrics from a UI button.
 
-OPEN DECISION: chosen freestyle service: __________
+DECIDED: chosen freestyle service: Amazon Translate
+- Lambda: oms-freestyle
+- Route: POST /orders/{orderId}/translate
+- Body: { "targetLanguage": "es" }
+- Translates the order description to the target language.
+- Returns both original and translated description.
+- Supported languages: es, fr, de, ar, he, zh
+- IAM permission needed: translate:TranslateText
 
 ## 9. Deliverables (one Word document)
 
@@ -193,7 +201,7 @@ Each partner fills in their own rows; one person assembles the final document.
 ## 11. Open decisions checklist
 - [x] Integration account owner (section 5): Eyal Abisdris (Partner A)
 - [ ] Deployed base API URL (section 6)
-- [ ] Freestyle service (section 8)
+- [x] Freestyle service (section 8): Amazon Translate — POST /orders/{orderId}/translate
 - [ ] Who assembles the final Word document
 - [ ] GSI vs in-Lambda sort for "get all" (section 4.1), only if needed
 
