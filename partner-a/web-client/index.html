@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Order Management System</h1>
+
+  <section class="card">
+    <h2>Create order</h2>
+    <input id="create-price" type="number" step="0.01" placeholder="price" />
+    <input id="create-desc" type="text" placeholder="description" />
+    <button onclick="createOrder()">Create</button>
+  </section>
+
+  <section class="card">
+    <h2>All orders</h2>
+    <button onclick="getAllOrders()">Refresh list</button>
+    <div id="orders-table"></div>
+  </section>
+
+  <section class="card">
+    <h2>Get one order</h2>
+    <input id="get-id" type="text" placeholder="orderId" />
+    <button onclick="getOrder()">Get</button>
+  </section>
+
+  <section class="card">
+    <h2>Update order</h2>
+    <input id="upd-id" type="text" placeholder="orderId" />
+    <input id="upd-price" type="number" step="0.01" placeholder="new price (optional)" />
+    <input id="upd-desc" type="text" placeholder="new description (optional)" />
+    <button onclick="updateOrder()">Update</button>
+  </section>
+
+  <section class="card">
+    <h2>Last backend response</h2>
+    <pre id="output">No request yet.</pre>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
