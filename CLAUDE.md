@@ -113,7 +113,7 @@ record. No separate event format to maintain.
 | Subscribe email | POST | /subscriptions | B |
 | Unsubscribe | DELETE | /subscriptions | B |
 | PDF summary | GET | /reports/deleted-orders | B |
-| Translate description | POST | /orders/{orderId}/translate | B |
+| System metrics (freestyle) | GET | /metrics | B |
 
 All responses are JSON. The PDF summary returns the download URL in the response body
 (never only in logs).
@@ -160,14 +160,12 @@ make it visible in the UI. Candidate ideas (choose one):
 - Amazon Polly: read order details aloud in the client.
 - CloudWatch dashboard: surface order metrics from a UI button.
 
-DECIDED: chosen freestyle service: Amazon Translate
+DECIDED: chosen freestyle service: Amazon CloudWatch
 - Lambda: oms-freestyle
-- Route: POST /orders/{orderId}/translate
-- Body: { "targetLanguage": "es" }
-- Translates the order description to the target language.
-- Returns both original and translated description.
-- Supported languages: es, fr, de, ar, he, zh
-- IAM permission needed: translate:TranslateText
+- Route: GET /metrics
+- Returns order activity metrics for the last 24 hours.
+- Response: { windowHours: 24, metrics: { ordersCreated, ordersDeleted, ordersListed, ordersUpdated } }
+- IAM permission needed: cloudwatch:GetMetricStatistics
 
 ## 9. Deliverables (one Word document)
 
@@ -202,7 +200,7 @@ Each partner fills in their own rows; one person assembles the final document.
 ## 11. Open decisions checklist
 - [x] Integration account owner (section 5): Eyal Abisdris (Partner A)
 - [x] Deployed base API URL (section 6): https://ia2iwtvws0.execute-api.us-east-1.amazonaws.com/prod
-- [x] Freestyle service (section 8): Amazon Translate — POST /orders/{orderId}/translate
+- [x] Freestyle service (section 8): Amazon CloudWatch — GET /metrics
 - [ ] Who assembles the final Word document
 - [ ] GSI vs in-Lambda sort for "get all" (section 4.1), only if needed
 
