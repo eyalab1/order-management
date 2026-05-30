@@ -52,3 +52,32 @@ async function updateOrder() {
   if (desc !== "") body.description = desc;
   await call("PUT", "/orders/" + id, body);
 }
+
+async function deleteOrder() {
+  const id = document.getElementById("del-id").value.trim();
+  await call("DELETE", "/orders/" + id);
+  getAllOrders();
+}
+
+async function subscribe() {
+  const email = document.getElementById("sub-email").value.trim();
+  await call("POST", "/subscriptions", { email });
+}
+
+async function unsubscribe() {
+  const email = document.getElementById("unsub-email").value.trim();
+  await call("DELETE", "/subscriptions", { email });
+}
+
+async function pdfSummary() {
+  const link = document.getElementById("pdf-link");
+  link.innerHTML = "";
+  const r = await call("GET", "/reports/deleted-orders");
+  if (r && r.data && r.data.url) {
+    link.innerHTML = `<a href="${r.data.url}" target="_blank" rel="noopener">Download PDF</a>`;
+  }
+}
+
+async function getMetrics() {
+  await call("GET", "/reports/metrics");
+}

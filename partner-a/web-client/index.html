@@ -37,6 +37,35 @@
   </section>
 
   <section class="card">
+    <h2>Delete order</h2>
+    <input id="del-id" type="text" placeholder="orderId" />
+    <button onclick="deleteOrder()">Delete</button>
+  </section>
+
+  <section class="card">
+    <h2>Subscribe to deletion notifications</h2>
+    <input id="sub-email" type="email" placeholder="email" />
+    <button onclick="subscribe()">Subscribe</button>
+  </section>
+
+  <section class="card">
+    <h2>Unsubscribe from notifications</h2>
+    <input id="unsub-email" type="email" placeholder="email" />
+    <button onclick="unsubscribe()">Unsubscribe</button>
+  </section>
+
+  <section class="card">
+    <h2>Deleted orders PDF report</h2>
+    <button onclick="pdfSummary()">Generate PDF</button>
+    <div id="pdf-link"></div>
+  </section>
+
+  <section class="card">
+    <h2>System metrics</h2>
+    <button onclick="getMetrics()">Show metrics</button>
+  </section>
+
+  <section class="card">
     <h2>Last backend response</h2>
     <pre id="output">No request yet.</pre>
   </section>
